@@ -6,7 +6,13 @@
 	  <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
-    <title>UI Hotspot</title>
+    <title>UI Hotspot | Status</title>
+    $(if refresh-timeout)
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+    $(endif)
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -16,6 +22,14 @@
   </head>
 
   <body>
+    <script language="JavaScript">
+    function openLogout() {
+      if (window.name != 'hotspot_status') return true;
+        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+        window.close();
+        return false;
+      }
+    </script>
   	<div class="background-image" style="background-image: url('assets/images/hotspot.png');"></div>
 
   	<div class="content">
@@ -24,39 +38,28 @@
       	<h5 class="my-0 mr-md-auto font-weight-normal brand-name">UI Hotspot</h5>
 	    </div>
   	  <div class="px-3 py-3 pt-md-5 pb-md-4"></div>
-	    <div class="container col-lg-4 mt-2">
+	    <div class="container col-lg-3 mt-2">
 	      <div class="card-deck mb-3 text-center">
 	        <div class="card mb-4 box-shadow">
 	          <div class="card-body">
   	          <!-- <h1 class="card-title pricing-card-title">Welcome Username</h1> -->
-
-              <h1 class="">Thank you</h1>
-              <p class="">you have just logged out</p>
-
-              <table class="table table-borderless mt-4">
-                <tr>
-                  <td>Username:</td>
-                  <td>username</td>
-                </tr>
-                <tr>
-                  <td>IP Address:</td>
-                  <td>192.168.254.254</td>
-                </tr>
-                <tr>
-                  <td>MAC Address:</td>
-                  <td>00:11:22:33:44:55</td>
-                </tr>
-                <tr>
-                  <td>Session Time:</td>
-                  <td>120 minutes</td>
-                </tr>
-                <tr>
-                  <td>bytes up/down:</td>
-                  <td>1024 KiB/10240 KiB</td>
-                </tr>
-	            </table>
-
-	            <button type="button" class="btn btn-lg btn-block btn-secondary bg-dark">Log in</button>
+              $(if login-by == 'trial')
+              <h3 class="">Welcome trial user</h3>
+              $(elif login-by != 'mac')
+              <h3 class="">Welcome $(username)</h3>
+	            <ul class="list-unstyled mt-3 mb-4 text-left user-status">
+                <li>IP Address: $(ip)</li>
+                <li>bytes up/down: $(bytes-in-nice) / $(bytes-out-nice)</li>
+                <li>status refresh: $(refresh-timeout)</li>
+                $(if session-time-left)
+                <li>connected: $(uptime)</li>
+                $(else)
+                <li>connected: $(uptime)</li>
+                $(endif)
+	            </ul>
+              <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+  	            <button type="submit" class="btn btn-lg btn-block btn-secondary btn-dark">Log off</button>
+              </form>
 	          </div>
 	        </div>
 	      </div>
@@ -65,7 +68,7 @@
         <div class="row">
           <div class="col-12 col-md">
             <!-- <img class="mb-2" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24"> -->
-            <small class="d-block mb-3 text-muted">© 2018-2018</small>
+            <small class="d-block mb-3 text-muted">© 2017-2018</small>
           </div>
         </div>
       </footer>

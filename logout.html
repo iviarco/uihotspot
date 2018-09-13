@@ -6,7 +6,9 @@
 	  <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
-    <title>UI Hotspot</title>
+    <title>UI Hotspot | Log out</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -16,6 +18,17 @@
   </head>
 
   <body>
+    <script language="JavaScript">
+    <!--
+        function openLogin() {
+    	if (window.name != 'hotspot_logout') return true;
+    	open('$(link-login)', '_blank', '');
+    	window.close();
+    	return false;
+        }
+    //-->
+    </script>
+
   	<div class="background-image" style="background-image: url('assets/images/hotspot.png');"></div>
 
   	<div class="content">
@@ -24,20 +37,40 @@
       	<h5 class="my-0 mr-md-auto font-weight-normal brand-name">UI Hotspot</h5>
 	    </div>
   	  <div class="px-3 py-3 pt-md-5 pb-md-4"></div>
-	    <div class="container col-lg-3 mt-2">
+	    <div class="container col-lg-4 mt-2">
 	      <div class="card-deck mb-3 text-center">
 	        <div class="card mb-4 box-shadow">
 	          <div class="card-body">
   	          <!-- <h1 class="card-title pricing-card-title">Welcome Username</h1> -->
 
-              <h3 class="">Welcome username</h3>
-	            <ul class="list-unstyled mt-3 mb-4 text-left user-status">
-                <li>IP Address: 192.168.254.254</li>
-                <li>bytes up/down: 1024 KiB/10240 Kib</li>
-                <li>status refresh: 30mins</li>
-                <li>connected: 5mins</li>
-	            </ul>
-	            <button type="button" class="btn btn-lg btn-block btn-secondary btn-dark">Log off</button>
+              <h1 class="">Thank you</h1>
+              <p class="">you have just logged out</p>
+
+              <table class="table table-borderless mt-4">
+                <tr>
+                  <td>Username:</td>
+                  <td>$(username)</td>
+                </tr>
+                <tr>
+                  <td>IP Address:</td>
+                  <td>$(ip)</td>
+                </tr>
+                <tr>
+                  <td>MAC Address:</td>
+                  <td>$(mac)</td>
+                </tr>
+                <tr>
+                  <td>Session Time:</td>
+                  <td>$(uptime)</td>
+                </tr>
+                <tr>
+                  <td>bytes up/down:</td>
+                  <td>$(bytes-in-nice) / $(bytes-out-nice)</td>
+                </tr>
+	            </table>
+              <form action="$(link-login)" name="login" onSubmit="return openLogin()">
+  	            <button type="submit" class="btn btn-lg btn-block btn-secondary bg-dark">Log in</button>
+              </form>
 	          </div>
 	        </div>
 	      </div>
@@ -46,7 +79,7 @@
         <div class="row">
           <div class="col-12 col-md">
             <!-- <img class="mb-2" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24"> -->
-            <small class="d-block mb-3 text-muted">© 2017-2018</small>
+            <small class="d-block mb-3 text-muted">© 2018-2018</small>
           </div>
         </div>
       </footer>

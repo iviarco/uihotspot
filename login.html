@@ -1,4 +1,6 @@
-<html lang="en"><head>
+<html lang="en">
+  <head>
+    <title>UI Hotspot</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -6,7 +8,8 @@
 	  <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
-    <title>UI Hotspot</title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -16,17 +19,44 @@
   </head>
 
   <body>
+    $(if chap-id)
+    	<form name="sendin" action="$(link-login-only)" method="post" hidden>
+    		<input type="hidden" name="username" />
+    		<input type="hidden" name="password" />
+    		<input type="hidden" name="dst" value="$(link-orig)" />
+    		<input type="hidden" name="popup" value="true" />
+    	</form>
+
+    	<script type="text/javascript" src="/md5.js"></script>
+    	<script type="text/javascript">
+      function doLogin() {
+    	<!--
+    		document.sendin.username.value = document.login.username.value;
+    		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+    		document.sendin.submit();
+    		return false;
+    	    }
+    	//-->
+    	</script>
+    $(endif)
+
   	<div class="background-image" style="background-image: url('assets/images/hotspot.png');"></div>
 
   	<div class="content">
 	    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark" style="box-shadow: 0px 2px 2px #3c3c3c">
 	    	<img class="brand-logo" src="assets/images/logo.png">
       	<h5 class="my-0 mr-md-auto font-weight-normal brand-name">UI Hotspot</h5>
-  			<div class="row col-lg-5 header-login">
-  				<span class="col-lg-5" style="margin: 0 -10px;"><input type="text" class="form-control input-default" name="username" placeholder="Username"></span>
-  				<span class="col-lg-5" style="margin: 0 -10px;"><input type="text" class="form-control input-default" name="password" placeholder="Password"></span>
-  				<span class="col-lg-2" style="margin: 0 -10px;"><button class="btn btn-secondary">Login</button></span>
-  			</div>
+
+        <form name="login" action="$(link-login-only)" method="post"
+          $(if chap-id) onSubmit="return doLogin()" $(endif)>
+    			<div class="row col-lg-12 header-login">
+              <input type="hidden" name="dst" value="$(link-orig)" />
+  						<input type="hidden" name="popup" value="true" />
+      				<span class="col-lg-5" style="margin: 10px 0 0 -10px;"><input type="text" class="form-control input-default" name="username" value="$(username)" placeholder="Username"></span>
+      				<span class="col-lg-5" style="margin: 10px 0 0 -10px;"><input type="password" class="form-control input-default" name="password" placeholder="Password"></span>
+      				<span class="col-lg-2" style="margin: 10px 0 0 -10px;"><button type="submit" class="btn btn-secondary">Login</button></span>
+    			</div>
+        </form>
 	    </div>
 
 	    <div class="container">
@@ -92,44 +122,13 @@
 	        </div>
 	      </div>
 	    </div>
-	    <footer class="pt-3 bg-dark container-fluid" style="margin-top: 100px !important;" hidden>
-        <div class="row">
-          <div class="col-12 col-md">
-            <!-- <img class="mb-2" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24"> -->
-            <small class="d-block mb-3 text-muted">© 2017-2018</small>
-          </div>
-          <!-- <div class="col-6 col-md">
-            <h5>Features</h5>
-            <ul class="list-unstyled text-small">
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Cool stuff</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Random feature</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Team feature</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Stuff for developers</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Another one</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Last time</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Resource</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Resource name</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Another resource</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Final resource</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Team</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Locations</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Privacy</a></li>
-              <li><i class="fa fa-check"></i><a class="text-muted" href="#">Terms</a></li>
-            </ul>
-          </div> -->
-        </div>
-      </footer>
     </div>
+
+    <script type="text/javascript">
+    <!--
+      document.login.username.focus();
+    //-->
+    </script>
 
 
     <!-- Bootstrap core JavaScript
